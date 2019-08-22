@@ -16,10 +16,10 @@ namespace MicroondasMVC.Models
         [Required(ErrorMessage = "{0} necessário")]
         [Display(Name ="Tempo (Minuto:Segundo)")]
 
-        public TimeSpan Tempo { get; set; }
+        public TimeSpan Tempo { get;  set; }
         [Required(ErrorMessage = "{0} necessária")]
         [Range(1,10, ErrorMessage ="Potência mínima permitida é {1}, máxima {2}")]
-        public int Potencia { get; set; } = 10;
+        public int Potencia { get;  set; } = 10;
 
         public Aquecimento() { }
 
@@ -28,6 +28,12 @@ namespace MicroondasMVC.Models
             Alimento = alimento;
             Tempo = tempo;
             Potencia = potencia;
+        }
+        public void AquecimentoPadrao()
+        {
+            TimeSpan valorPadrao = new TimeSpan(00, 30, 00);
+            Tempo = valorPadrao;
+            Potencia = 8;
         }
     }
 }

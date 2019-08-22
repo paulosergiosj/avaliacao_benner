@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MicroondasMVC.Services;
 
 namespace MicroondasMVC
 {
@@ -33,6 +34,7 @@ namespace MicroondasMVC
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<AquecimentoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

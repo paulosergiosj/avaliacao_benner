@@ -14,6 +14,11 @@ namespace MicroondasMVC.Controllers
     {
         private readonly AquecimentoService _aquecimentoService;
 
+        public AquecimentosController(AquecimentoService _service)
+        {
+            _aquecimentoService = _service;
+        }
+
 
         public IActionResult Index()
         {
@@ -30,21 +35,45 @@ namespace MicroondasMVC.Controllers
             {
                 try
                 {
-                  var Obj =  _aquecimentoService.AqueceAlimento(aquecimento);
-                    return RedirectToAction(nameof(Iniciar), new { obj = Obj });
+                     var obj =  _aquecimentoService.AqueceAlimento(aquecimento);
+                    return View(nameof(Iniciar),obj);
                 }
                 catch(TempoException e)
                 {
                     return RedirectToAction(nameof(Error), new { message = e.Message });
                 }
             }
-            return null;
+            return View(nameof(Index));
         }
+
+        public IActionResult InicioRapido()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult InicioRapido(Aquecimento aquecimento)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var obj = _aquecimentoService.InicioRapido(aquecimento);
+                    return View(nameof(Iniciar), obj);
+                }
+                catch (TempoException e)
+                {
+                    return RedirectToAction(nameof(Error), new { message = e.Message });
+                }
+            }
+            return View(nameof(Index));
+        }
+
 
         public IActionResult Iniciar(Aquecimento obj) //abre a view mostrando o aquecimento
         {
             return View(obj);
         }
+
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel
