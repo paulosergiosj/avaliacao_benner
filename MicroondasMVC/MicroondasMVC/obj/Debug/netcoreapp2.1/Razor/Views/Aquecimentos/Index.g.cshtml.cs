@@ -76,7 +76,7 @@ using MicroondasMVC.Models;
             WriteLiteral("</h2>\r\n\r\n    <p>\r\n        ");
             EndContext();
             BeginContext(102, 78, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d5b522be9b6415c8bf5f0e64a77f6ef", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "90313f8f4a8148b7b48c2f77411c77f7", async() => {
                 BeginContext(147, 29, true);
                 WriteLiteral("Inserir Alimento para aquecer");
                 EndContext();
@@ -99,7 +99,7 @@ using MicroondasMVC.Models;
             WriteLiteral("\r\n        ");
             EndContext();
             BeginContext(190, 105, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4717160c275b441c8eb087fcb788de64", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "43cc721fb5ee443d90406daa0fecbb92", async() => {
                 BeginContext(251, 40, true);
                 WriteLiteral("Inserir Alimento para Aquecimento Rapido");
                 EndContext();

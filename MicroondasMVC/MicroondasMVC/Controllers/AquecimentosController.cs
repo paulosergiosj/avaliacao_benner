@@ -12,13 +12,7 @@ namespace MicroondasMVC.Controllers
 {
     public class AquecimentosController : Controller
     {
-        private readonly AquecimentoService _aquecimentoService;
-
-        public AquecimentosController(AquecimentoService _service)
-        {
-            _aquecimentoService = _service;
-        }
-
+        private static AquecimentoService _aquecimentoService = new AquecimentoService();
 
         public IActionResult Index()
         {
@@ -38,7 +32,7 @@ namespace MicroondasMVC.Controllers
                      var obj =  _aquecimentoService.AqueceAlimento(aquecimento);
                     return View(nameof(Iniciar),obj);
                 }
-                catch(TempoException e)
+                catch(ApplicationException e)
                 {
                     return RedirectToAction(nameof(Error), new { message = e.Message });
                 }
