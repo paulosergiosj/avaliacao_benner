@@ -159,12 +159,12 @@ Write(ViewData["Title"]);
             WriteLiteral("\r\n                    </td>\r\n                    <td>\r\n                        ");
             EndContext();
             BeginContext(1625, 214, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2bf7b124be344a0b9e5f3c35f8123b48", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecff58ec9610412a84a05b73ca2e6e3a", async() => {
                 BeginContext(1652, 30, true);
                 WriteLiteral("\r\n                            ");
                 EndContext();
                 BeginContext(1682, 124, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7899823c36d24362917b26cadc21d3f2", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9b1095b826c5478d8104eef254aff1f6", async() => {
                     BeginContext(1786, 16, true);
                     WriteLiteral("Inserir Alimento");
                     EndContext();

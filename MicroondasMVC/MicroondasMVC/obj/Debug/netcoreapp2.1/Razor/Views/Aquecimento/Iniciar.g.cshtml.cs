@@ -60,7 +60,7 @@ using MicroondasMVC.Models;
             WriteLiteral("\r\n<h2>Iniciar</h2>\r\n");
             EndContext();
             BeginContext(169, 285, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "42b0527b52af4c02b5ee08295a8ef1c0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "93f1493c18c54f499d08d00d3084a67f", async() => {
                 BeginContext(175, 34, true);
                 WriteLiteral("\r\n    <div id=\"app\">\r\n        <h4>");
                 EndContext();

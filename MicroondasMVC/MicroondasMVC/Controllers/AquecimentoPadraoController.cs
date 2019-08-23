@@ -20,27 +20,28 @@ namespace MicroondasMVC.Controllers
         [HttpPost]
         public IActionResult Aquecer(int id, string alimento)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                  if  (_aquecimentoPadraoService.ValidaAlimento(id, alimento))
+
+                    if (_aquecimentoPadraoService.ValidaAlimento(id, alimento))
                     {
                         var obj = _aquecimentoPadraoService.aquecimentos[id];
                         return View(nameof(Iniciar), obj);
                     }
-                    
-                }
-                catch (ApplicationException e)
-                {
-                    return RedirectToAction(nameof(Error), new { message = e.Message });
+
                 }
             }
-            return View(nameof(Aquecer),id);
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+            return View(nameof(Aquecer), id);
         }
         public IActionResult Iniciar(AquecimentoPadrao obj) //abre a view mostrando o aquecimento
         {
-            
+
             return View(obj);
         }
 
@@ -50,11 +51,40 @@ namespace MicroondasMVC.Controllers
             {
                 var lista = _aquecimentoPadraoService.EncontraAlimento(alimento);
                 return View(lista);
-            }catch(NaoEncontradoException e)
+            }
+            catch (NaoEncontradoException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
         }
+        public IActionResult Inserir()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Inserir(AquecimentoPadrao aquecimento)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _aquecimentoPadraoService.InsereAquecimentoPadrao(aquecimento);
+                    return RedirectToAction("Index","Aquecimento");
+                }
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+            return View();
+        }
+        public IActionResult ListaAquecimentoPadrao()
+        {
+            var obj = _aquecimentoPadraoService.aquecimentos;
+            return View(obj);
+        }
+
+
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel

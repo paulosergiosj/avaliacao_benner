@@ -9,7 +9,7 @@ namespace MicroondasMVC.Services
 {
     public class AquecimentoPadraoService
     {
-        public List<AquecimentoPadrao> aquecimentos = CarregaProgramas();
+        public static List<AquecimentoPadrao> aquecimentos = CarregaProgramas();
         public int ID = 4;
 
         public bool ValidaAlimento(int id, string alimentoAquecer)
@@ -61,6 +61,12 @@ namespace MicroondasMVC.Services
 
         }
 
+        public void InsereAquecimentoPadrao(AquecimentoPadrao aquecimento)
+        {
+            aquecimento.ID = ID;
+            ID++;
+            aquecimentos.Add(aquecimento);
+        }
         public static List<AquecimentoPadrao> CarregaProgramas()//Carrega os aquecimentos padrões - Nivel 2
         {
             var newAquecimento = new List<AquecimentoPadrao>();
