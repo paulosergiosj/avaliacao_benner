@@ -12,22 +12,53 @@ namespace MicroondasMVC.Services
         public List<AquecimentoPadrao> aquecimentos = CarregaProgramas();
         public int ID = 4;
 
+        public bool ValidaAlimento(int id, string alimentoAquecer)
+        {
+            if (string.IsNullOrEmpty(alimentoAquecer))
+            {
+                throw new StringVaziaException("'Alimento' necessário para validação do aquecimento");
+            }
+            if (AlimentoCompativel(id, alimentoAquecer))
+            {
+                return true;
+            }
+            else
+            {
+                throw new AlimentoIncompativelException($"Alimento {alimentoAquecer} incompatível com o programa {aquecimentos[id].Nome}." +
+                    $"Compativel: {aquecimentos[id].Alimento}");
+            }
+        }
+
         public bool AlimentoCompativel(int id,string alimentoAquecer)
         {
             string alimentoChave = aquecimentos[id].Alimento.ToLower();
             string alimento = alimentoAquecer.ToLower();
-
-            if (string.IsNullOrEmpty(alimento))
-            {
-                throw new StringVaziaException("'Alimento' necessário para validação do aquecimento");
-            }
             string[] palavras = alimento.Split(new char[] { ' ', '?', '!', '.', ',', ';','*','@','#','$','%','¨','-','=','+','_' });
 
-            if (!palavras.Contains(alimentoChave))
+            if (palavras.Contains(alimentoChave))
             {
-                throw new AlimentoIncompativelException($"Alimento {alimento} incompatível com o programa {aquecimentos[id].Nome}");
+                return true;
             }
-            return true;
+            return false;
+        }
+
+        public List<AquecimentoPadrao> EncontraAlimento(string alimento)
+        {
+            List<AquecimentoPadrao> registros = new List<AquecimentoPadrao>();
+
+            for (int i = 0; i <= aquecimentos.Count ; i++)
+            {
+               if (AlimentoCompativel(i, alimento))
+                {
+                    registros.Add(aquecimentos[i]);
+                }
+            }
+            if (registros.Count == 0)
+            {
+                throw new NaoEncontradoException($"Não foram Encontrados Aquecimentos Cadastrados compativeis com {alimento}");
+            }
+            return registros;
+
         }
 
         public static List<AquecimentoPadrao> CarregaProgramas()//Carrega os aquecimentos padrões - Nivel 2

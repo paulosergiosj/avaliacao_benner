@@ -36,3 +36,4 @@ C:\Users\Paulo\Documents\Avaliação Benner\MicroondasMVC\MicroondasMVC\obj\Debu
 C:\Users\Paulo\Documents\Avaliação Benner\MicroondasMVC\MicroondasMVC\obj\Debug\netcoreapp2.1\Razor\Views\Aquecimento\Index.g.cshtml.cs
 C:\Users\Paulo\Documents\Avaliação Benner\MicroondasMVC\MicroondasMVC\obj\Debug\netcoreapp2.1\Razor\Views\Aquecimento\Iniciar.g.cshtml.cs
 C:\Users\Paulo\Documents\Avaliação Benner\MicroondasMVC\MicroondasMVC\obj\Debug\netcoreapp2.1\Razor\Views\Aquecimento\InicioRapido.g.cshtml.cs
+C:\Users\Paulo\Documents\Avaliação Benner\MicroondasMVC\MicroondasMVC\obj\Debug\netcoreapp2.1\Razor\Views\AquecimentoPadrao\BuscaAquecimento.g.cshtml.cs

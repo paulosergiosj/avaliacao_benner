@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MicroondasMVC.Models;
 using MicroondasMVC.Services;
+using MicroondasMVC.Services.Exceptions;
 
 namespace MicroondasMVC.Controllers
 {
@@ -23,7 +24,7 @@ namespace MicroondasMVC.Controllers
             {
                 try
                 {
-                  if  (_aquecimentoPadraoService.AlimentoCompativel(id, alimento))
+                  if  (_aquecimentoPadraoService.ValidaAlimento(id, alimento))
                     {
                         var obj = _aquecimentoPadraoService.aquecimentos[id];
                         return View(nameof(Iniciar), obj);
@@ -41,6 +42,18 @@ namespace MicroondasMVC.Controllers
         {
             
             return View(obj);
+        }
+
+        public IActionResult BuscaAquecimento(string alimento)
+        {
+            try
+            {
+                var lista = _aquecimentoPadraoService.EncontraAlimento(alimento);
+                return View(lista);
+            }catch(NaoEncontradoException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
         public IActionResult Error(string message)
         {

@@ -14,7 +14,6 @@ namespace MicroondasMVC.Controllers
     {
         private static AquecimentoService _aquecimentoService = new AquecimentoService();
         private static AquecimentoPadraoService _aquecimentoPadraoService = new AquecimentoPadraoService();
-        private static AquecimentoPadraoController _aquecimentoPadraoController = new AquecimentoPadraoController();
 
         public IActionResult Index()
         {
