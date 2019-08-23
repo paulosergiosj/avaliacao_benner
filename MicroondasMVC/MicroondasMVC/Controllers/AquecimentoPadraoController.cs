@@ -49,7 +49,7 @@ namespace MicroondasMVC.Controllers
                 var lista = _aquecimentoPadraoService.EncontraAlimento(palavra);
                 return View(lista);
             }
-            catch (NaoEncontradoException e)
+            catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }

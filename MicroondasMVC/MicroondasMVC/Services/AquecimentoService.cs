@@ -23,7 +23,11 @@ namespace MicroondasMVC.Services
         }
         public Aquecimento InicioRapido(Aquecimento aquecimento)
         {
-            aquecimento.AquecimentoRapido();
+            if (string.IsNullOrEmpty(aquecimento.Alimento))
+            {
+                throw new StringVaziaException("Não é possivel iniciar o aquecimento sem informar o Alimento");
+            }
+            aquecimento.AquecimentoRapido(); //adiciona parametros de aquecimento rapido nos atributos de potencia e tempo
             AqueceAlimento(aquecimento);
             return aquecimento;
         }

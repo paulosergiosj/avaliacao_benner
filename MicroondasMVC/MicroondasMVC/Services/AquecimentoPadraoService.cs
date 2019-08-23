@@ -10,7 +10,6 @@ namespace MicroondasMVC.Services
     public class AquecimentoPadraoService
     {
         public static List<AquecimentoPadrao> aquecimentos = CarregaProgramas();
-        public int ID = 4;
 
         public bool ValidaAlimento(int id, string alimentoAquecer)
         {
@@ -29,7 +28,7 @@ namespace MicroondasMVC.Services
             }
         }
 
-        public bool AlimentoCompativel(int id,string alimentoAquecer)
+        public bool AlimentoCompativel(int id,string alimentoAquecer) //Procura o alimento na lista
         {
             string alimentoChave = aquecimentos[id].Alimento.ToLower();
             string alimento = alimentoAquecer.ToLower();
@@ -42,7 +41,7 @@ namespace MicroondasMVC.Services
             return false;
         }
 
-        public List<AquecimentoPadrao> EncontraAlimento(string alimento)
+        public List<AquecimentoPadrao> EncontraAlimento(string alimento) // Varre lista de aquecimentos procurando o alimento passado como parametro.
         {
             List<AquecimentoPadrao> registros = new List<AquecimentoPadrao>();
 
@@ -76,11 +75,11 @@ namespace MicroondasMVC.Services
         {
             return aquecimentos[posicao];
         }
-        public List<AquecimentoPadrao> RetornaAquecimentos()
+        public List<AquecimentoPadrao> RetornaAquecimentos() //Retorna array de alimentos para utilização nos controllers
         {
             return aquecimentos;
         }
-        public void AqueceAlimento(AquecimentoPadrao aquecimento)
+        public void AqueceAlimento(AquecimentoPadrao aquecimento) //Executa validações ao aquecer o alimento
         {
             var minutos = aquecimento.Tempo.Hours;
             var segundos = aquecimento.Tempo.Minutes;

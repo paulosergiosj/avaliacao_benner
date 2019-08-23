@@ -65,6 +65,7 @@ namespace MicroondasMVC.Models
                 alimento += new string(charDeAquecimento, Potencia);
             }
             stringFinal.Add(alimento);
+            stringFinal.Add("Aquecida!");   
             return stringFinal;
         }
 

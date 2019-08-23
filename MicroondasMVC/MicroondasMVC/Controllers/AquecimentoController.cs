@@ -37,7 +37,7 @@ namespace MicroondasMVC.Controllers
                     return RedirectToAction(nameof(Error), new { message = e.Message });
                 }
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult InicioRapido()
@@ -47,12 +47,15 @@ namespace MicroondasMVC.Controllers
         [HttpPost]
         public IActionResult InicioRapido(Aquecimento aquecimento)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var obj = _aquecimentoService.InicioRapido(aquecimento);
                 return View(nameof(Iniciar), obj);
             }
-            return RedirectToAction("Index","Home");
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
 
