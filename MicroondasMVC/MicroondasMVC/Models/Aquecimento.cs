@@ -9,7 +9,7 @@ namespace MicroondasMVC.Models
 {
     public class Aquecimento
     {
-        public int ID { get; set; }
+
         [Required(ErrorMessage = "{0} necessário")]
         public string Alimento { get; set; }
         [DataType(DataType.Time)]
@@ -31,13 +31,13 @@ namespace MicroondasMVC.Models
             Tempo = tempo;
             Potencia = potencia;
         }
-        public void AquecimentoPadrao()
+        public void AquecimentoRapido()
         {
             TimeSpan valorPadrao = new TimeSpan(00, 30, 00);
             Tempo = valorPadrao;
             Potencia = 8;
         }
-        public List<string> ExecutarAquecimento()
+        public List<string> ExecutarAquecimento(char charDeAquecimento)
         {
             
             double minutos = Tempo.Hours;
@@ -62,7 +62,7 @@ namespace MicroondasMVC.Models
                     stringFinal.Add(alimento);
                     alimento = null;
                 }
-                alimento += new string('.', Potencia);
+                alimento += new string(charDeAquecimento, Potencia);
             }
             stringFinal.Add(alimento);
             return stringFinal;

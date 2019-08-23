@@ -10,11 +10,8 @@ namespace MicroondasMVC.Services
 {
     public class AquecimentoService
     {
-        public List<Aquecimento> aquecimentos = new List<Aquecimento>();
-        public int Id { get; set; }
         public Aquecimento AqueceAlimento(Aquecimento aquecimento)
         {
-            Id++;
             var minutos = aquecimento.Tempo.Hours;
             var segundos = aquecimento.Tempo.Minutes;
             var potencia = aquecimento.Potencia;
@@ -27,16 +24,15 @@ namespace MicroondasMVC.Services
             {
                 throw new PotenciaException("Potencia Minima permitida: 1, Maxima permitida : 10");
             }
-
-            aquecimento.ID = Id;
-            aquecimentos.Add(aquecimento);
             return aquecimento;
         }
         public Aquecimento InicioRapido(Aquecimento aquecimento)
         {
-            aquecimento.AquecimentoPadrao();
+            aquecimento.AquecimentoRapido();
             AqueceAlimento(aquecimento);
             return aquecimento;
         }
+        
+       
     }
 }

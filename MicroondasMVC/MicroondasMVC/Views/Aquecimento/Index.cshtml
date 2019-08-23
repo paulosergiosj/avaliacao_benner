@@ -1,0 +1,65 @@
+﻿@model List<MicroondasMVC.Models.AquecimentoPadrao>;
+@using MicroondasMVC.Models;
+@{
+    ViewData["Title"] = "Microondas";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Aquecer" class="btn btn-info">Inserir Alimento para aquecer</a>
+    <a asp-action="InicioRapido" class="btn btn-info pull-right">Inserir Alimento para Aquecimento Rapido</a>
+</p>
+
+
+<div>
+    <table class="table">
+        <thead>
+            <tr class="success">
+                <th>
+                    <h6 type="text" class="text-info">Nome</h6>
+                </th>
+                <th>
+                    <h6 type="text" class="text-info">Alimento</h6>
+                </th>
+                <th>
+                    <h6 type="text" class="text-info">Instruções de Uso</h6>
+                </th>
+                <th>
+                    <h6 type="text" class="text-info">Tempo</h6>
+                </th>
+                <th>
+                    <h6 type="text" class="text-info">Potencia</h6>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AquecimentoPadrao item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instrucoes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tempo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Potencia)
+                </td>
+                <td>
+                    <form class="bottom-right">
+                        <a asp-controller="AquecimentoPadrao" asp-route-id="@item.ID" asp-action="Aquecer" class="btn btn-info">Inserir Alimento</a>
+                    </form>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

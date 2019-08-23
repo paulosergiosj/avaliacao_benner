@@ -35,6 +35,7 @@ namespace MicroondasMVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<AquecimentoService>();
+            services.AddScoped<AquecimentoPadraoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +59,7 @@ namespace MicroondasMVC
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Aquecimento}/{action=Index}/{id?}");
             });
         }
     }

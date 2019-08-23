@@ -1,0 +1,24 @@
+﻿@model MicroondasMVC.Models.AquecimentoPadrao
+@{
+    ViewData["Title"] = "Iniciar";
+    List<string> stringPontos = Model.ExecutarAquecimento(Model.CaracterDeAquecimento);
+}
+
+<h2>Iniciar</h2>
+<body>
+    <div id="app">
+        <h2>Aquecendo com o programa: @Model.Nome</h2>
+        <h4>Tempo: @Model.Tempo</h4>
+        <h4>Alimento compativel com o programa: @Model.Alimento</h4>
+        <h4>Potencia: @Model.Potencia</h4>
+
+        @foreach (string linha in stringPontos)
+        {
+            <h6>@linha</h6>
+        }
+        <h6>Aquecida!</h6>
+
+    </div>
+</body>
+
+

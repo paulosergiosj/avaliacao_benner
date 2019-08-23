@@ -10,13 +10,16 @@ using System.Diagnostics;
 
 namespace MicroondasMVC.Controllers
 {
-    public class AquecimentosController : Controller
+    public class AquecimentoController : Controller
     {
         private static AquecimentoService _aquecimentoService = new AquecimentoService();
+        private static AquecimentoPadraoService _aquecimentoPadraoService = new AquecimentoPadraoService();
+        private static AquecimentoPadraoController _aquecimentoPadraoController = new AquecimentoPadraoController();
 
         public IActionResult Index()
         {
-            return View();
+            var aquecimentos = _aquecimentoPadraoService.aquecimentos;
+            return View(aquecimentos);
         }
         public IActionResult Aquecer()
         {
@@ -29,10 +32,14 @@ namespace MicroondasMVC.Controllers
             {
                 try
                 {
-                     var obj =  _aquecimentoService.AqueceAlimento(aquecimento);
-                    return View(nameof(Iniciar),obj);
+                    var obj = _aquecimentoService.AqueceAlimento(aquecimento);
+                    return View(nameof(Iniciar), obj);
                 }
-                catch(ApplicationException e)
+                catch (TempoException e)
+                {
+                    return RedirectToAction(nameof(Error), new { message = e.Message });
+                }
+                catch (PotenciaException e)
                 {
                     return RedirectToAction(nameof(Error), new { message = e.Message });
                 }
@@ -49,15 +56,8 @@ namespace MicroondasMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var obj = _aquecimentoService.InicioRapido(aquecimento);
-                    return View(nameof(Iniciar), obj);
-                }
-                catch (TempoException e)
-                {
-                    return RedirectToAction(nameof(Error), new { message = e.Message });
-                }
+                var obj = _aquecimentoService.InicioRapido(aquecimento);
+                return View(nameof(Iniciar), obj);
             }
             return View(nameof(Index));
         }
