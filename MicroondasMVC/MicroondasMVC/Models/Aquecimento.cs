@@ -57,7 +57,7 @@ namespace MicroondasMVC.Models
 
             for (int i = 1; i <= totalSegundos; i++)
             {
-                if (alimento.Length > 300)
+                if (alimento.Length > 200)
                 {
                     stringFinal.Add(alimento);
                     alimento = null;

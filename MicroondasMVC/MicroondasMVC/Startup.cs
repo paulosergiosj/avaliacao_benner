@@ -59,7 +59,7 @@ namespace MicroondasMVC
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Aquecimento}/{action=Index}/{alimento?}");
+                    template: "{controller=Home}/{action=Index}/{alimento?}/{id?}");
             });
         }
     }

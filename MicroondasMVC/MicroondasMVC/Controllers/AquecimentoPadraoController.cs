@@ -13,31 +13,28 @@ namespace MicroondasMVC.Controllers
     {
         private static AquecimentoPadraoService _aquecimentoPadraoService = new AquecimentoPadraoService();
 
-        public IActionResult Aquecer(int id)
+        public IActionResult Aquecer(int id,string alimento)
         {
-            return View(id);
+            ViewData["id"] = id;    
+            return View();
         }
-        [HttpPost]
-        public IActionResult Aquecer(int id, string alimento)
+
+       [HttpPost]
+        public IActionResult Aquecer(string alimento, int id)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (_aquecimentoPadraoService.ValidaAlimento(id, alimento))
                 {
-
-                    if (_aquecimentoPadraoService.ValidaAlimento(id, alimento))
-                    {
-                        var obj = _aquecimentoPadraoService.aquecimentos[id];
-                        return View(nameof(Iniciar), obj);
-                    }
-
+                    var obj = _aquecimentoPadraoService.RetornaAquecimentosByPos(id);
+                    return View(nameof(Iniciar), obj);
                 }
             }
             catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            return View(nameof(Aquecer), id);
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult Iniciar(AquecimentoPadrao obj) //abre a view mostrando o aquecimento
         {
@@ -45,11 +42,11 @@ namespace MicroondasMVC.Controllers
             return View(obj);
         }
 
-        public IActionResult BuscaAquecimento(string alimento)
+        public IActionResult BuscaAquecimento(string palavra)
         {
             try
             {
-                var lista = _aquecimentoPadraoService.EncontraAlimento(alimento);
+                var lista = _aquecimentoPadraoService.EncontraAlimento(palavra);
                 return View(lista);
             }
             catch (NaoEncontradoException e)
@@ -69,7 +66,7 @@ namespace MicroondasMVC.Controllers
                 if (ModelState.IsValid)
                 {
                     _aquecimentoPadraoService.InsereAquecimentoPadrao(aquecimento);
-                    return RedirectToAction("Index","Aquecimento");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             catch (ApplicationException e)
@@ -80,11 +77,9 @@ namespace MicroondasMVC.Controllers
         }
         public IActionResult ListaAquecimentoPadrao()
         {
-            var obj = _aquecimentoPadraoService.aquecimentos;
+            var obj = _aquecimentoPadraoService.RetornaAquecimentos();
             return View(obj);
         }
-
-
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel

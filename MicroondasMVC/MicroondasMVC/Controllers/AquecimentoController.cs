@@ -13,17 +13,7 @@ namespace MicroondasMVC.Controllers
     public class AquecimentoController : Controller
     {
         private static AquecimentoService _aquecimentoService = new AquecimentoService();
-        private static AquecimentoPadraoService _aquecimentoPadraoService = new AquecimentoPadraoService();
 
-        public IActionResult Index(string alimento)
-        {
-            var aquecimentos = _aquecimentoPadraoService.aquecimentos;
-            if (!string.IsNullOrEmpty(alimento))
-            {
-
-            }
-            return View(aquecimentos);
-        }
         public IActionResult Aquecer()
         {
             return View();
@@ -47,7 +37,7 @@ namespace MicroondasMVC.Controllers
                     return RedirectToAction(nameof(Error), new { message = e.Message });
                 }
             }
-            return View(nameof(Index));
+            return RedirectToAction("Index","Home");
         }
 
         public IActionResult InicioRapido()
@@ -62,7 +52,7 @@ namespace MicroondasMVC.Controllers
                 var obj = _aquecimentoService.InicioRapido(aquecimento);
                 return View(nameof(Iniciar), obj);
             }
-            return View(nameof(Index));
+            return RedirectToAction("Index","Home");
         }
 
 

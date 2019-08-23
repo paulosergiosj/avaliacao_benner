@@ -6,12 +6,12 @@
 
 <h2>Iniciar</h2>
 <body>
-    <div id="app">
-        <h4>@Model.Tempo</h4>
-        <h4>@Model.Alimento</h4>
-        <h4>@Model.Potencia</h4>
-        
-        @foreach(string linha in stringPontos)
+    <div>
+        <h4>Tempo: @Model.Tempo</h4>
+        <h4>Alimento: @Model.Alimento</h4>
+        <h4>Potencia: @Model.Potencia</h4>
+<hr />
+        @foreach (string linha in stringPontos)
         {
             <h6>@linha</h6>
         }

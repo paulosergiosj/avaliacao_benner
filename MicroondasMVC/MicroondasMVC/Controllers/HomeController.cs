@@ -5,39 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MicroondasMVC.Models;
+using MicroondasMVC.Services;
 
 namespace MicroondasMVC.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private static AquecimentoPadraoService _aquecimentoPadraoService = new AquecimentoPadraoService();
+        public IActionResult Index(string alimento)
         {
-            return View();
+            var aquecimentos = _aquecimentoPadraoService.RetornaAquecimentos();
+            if (!string.IsNullOrEmpty(alimento))
+            {
+                return RedirectToAction("BuscaAquecimento", "AquecimentoPadrao", new { palavra = alimento });
+            }
+            return View(aquecimentos);
         }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { Message = "Home error"});
-        }
+ 
     }
 }

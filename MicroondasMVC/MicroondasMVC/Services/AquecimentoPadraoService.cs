@@ -46,7 +46,12 @@ namespace MicroondasMVC.Services
         {
             List<AquecimentoPadrao> registros = new List<AquecimentoPadrao>();
 
-            for (int i = 0; i <= aquecimentos.Count ; i++)
+
+            if (string.IsNullOrEmpty(alimento))
+            {
+                throw new StringVaziaException("'Alimento' necessário para pesquisa");
+            }
+            for (int i = 0; i <= aquecimentos.Count-1 ; i++)
             {
                if (AlimentoCompativel(i, alimento))
                 {
@@ -55,7 +60,7 @@ namespace MicroondasMVC.Services
             }
             if (registros.Count == 0)
             {
-                throw new NaoEncontradoException($"Não foram Encontrados Aquecimentos Cadastrados compativeis com {alimento}");
+                throw new NaoEncontradoException($"Não foram Encontrados Aquecimentos Cadastrados compativeis com '{alimento}' ");
             }
             return registros;
 
@@ -63,9 +68,32 @@ namespace MicroondasMVC.Services
 
         public void InsereAquecimentoPadrao(AquecimentoPadrao aquecimento)
         {
-            aquecimento.ID = ID;
-            ID++;
+            AqueceAlimento(aquecimento);
+            aquecimento.ID = aquecimentos.Count;
             aquecimentos.Add(aquecimento);
+        }
+        public AquecimentoPadrao RetornaAquecimentosByPos(int posicao)
+        {
+            return aquecimentos[posicao];
+        }
+        public List<AquecimentoPadrao> RetornaAquecimentos()
+        {
+            return aquecimentos;
+        }
+        public void AqueceAlimento(AquecimentoPadrao aquecimento)
+        {
+            var minutos = aquecimento.Tempo.Hours;
+            var segundos = aquecimento.Tempo.Minutes;
+            var potencia = aquecimento.Potencia;
+
+            if ((minutos > 2) || (segundos < 1 && minutos < 1) || (minutos >= 2 && segundos > 0) || (minutos == 0 && segundos == 0))
+            {
+                throw new TempoException("O tempo deve estar entre 2 Minutos(02:00) e 1 Segundo (00:01)");
+            }
+            if (potencia < 1 || potencia > 10)
+            {
+                throw new PotenciaException("Potencia Minima permitida: 1, Maxima permitida : 10");
+            }
         }
         public static List<AquecimentoPadrao> CarregaProgramas()//Carrega os aquecimentos padrões - Nivel 2
         {

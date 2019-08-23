@@ -1,9 +1,11 @@
-﻿@model List<MicroondasMVC.Models.Aquecimento>
+﻿@model List<MicroondasMVC.Models.AquecimentoPadrao>
 @{
     ViewData["Title"] = "Resultado da busca";
 }
 
 <h2>@ViewData["Title"]</h2>
+
+<a asp-controller="Home"  asp-action="Index" class="btn btn-info">Página Inicial</a>
 
 <div>
     <table class="table">
@@ -47,9 +49,11 @@
                         @Html.DisplayFor(modelItem => item.Potencia)
                     </td>
                     <td>
-                        <form class="bottom-right">
-                            <a asp-controller="AquecimentoPadrao" asp-route-id="@item.ID" asp-action="Aquecer" class="btn btn-info">Inserir Alimento</a>
+                        <form class="bottom-right" asp-controller="AquecimentoPadrao" asp-action="Aquecer" method="get">
+                            <input type="hidden" name="id" value="@item.ID">
+                            <button type="submit" class="btn btn-info">Inserir Alimento</button>
                         </form>
+
                     </td>
                 </tr>
             }
