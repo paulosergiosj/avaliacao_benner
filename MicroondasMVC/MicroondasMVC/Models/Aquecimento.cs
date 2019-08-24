@@ -13,11 +13,8 @@ namespace MicroondasMVC.Models
         [Required(ErrorMessage = "{0} necessário")]
         public string Alimento { get; set; }
         [DataType(DataType.Time)]
-        //      [DataType(DataType.Duration)]
         [Required(ErrorMessage = "{0} necessário")]
         [Display(Name = "Tempo (Minuto:Segundo)")]
-        //               [DisplayFormat(DataFormatString = "{0:mm\\:ss}", ApplyFormatInEditMode = true)]
-        //        [DisplayFormat(DataFormatString = "{0:t}")]
         public TimeSpan Tempo { get; set; }
         [Required(ErrorMessage = "{0} necessária")]
         [Range(1, 10, ErrorMessage = "Potência mínima permitida é {1}, máxima {2}")]
